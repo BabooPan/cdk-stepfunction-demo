@@ -11,6 +11,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorEmail: 'lpig0818@gmail.com',
   keywords: ['aws', 'stepfunction'],
   defaultReleaseBranch: 'main',
+  release: false,
   stability: 'experimental',
   autoDetectBin: false,
   dependabot: false,
