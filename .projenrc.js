@@ -10,13 +10,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorName: 'Baboo Pan',
   authorEmail: 'lpig0818@gmail.com',
   keywords: ['aws', 'stepfunction'],
-  defaultReleaseBranch: 'main',
   release: false,
   stability: 'experimental',
   autoDetectBin: false,
   dependabot: false,
-  cdkVersion: '2.3.0',
+  cdkVersion: '2.10.0',
+  // Default release the main branch with major version 2.
   majorVersion: 2,
+  defaultReleaseBranch: 'main',
+  // Also release the 'cdkv1' branch with major version 1.
+  // releaseBranches: {
+  //   cdkv1: { npmDistTag: 'cdkv1', majorVersion: 1 },
+  // },
   depsUpgradeOptions: {
     ignoreProjen: false,
     workflowOptions: {

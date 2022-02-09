@@ -1,10 +1,10 @@
+import * as path from 'path';
 import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as lambda from 'aws-cdk-lib/aws-lambda';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+// import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 import * as sfnTasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
-import { Duration } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
 export class CdkStepFunctionDemo extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -21,11 +21,17 @@ export class CdkStepFunctionDemo extends cdk.Stack {
 
     const lambdaPath = `${__dirname}/lambda-assets`;
 
-    const randomFunction = new NodejsFunction(this, 'randomFunction', {
-      entry: `${lambdaPath}/random-numbers/index.ts`,
-      handler: 'handler',
-      // runtime: lambda.Runtime.NODEJS_14_X,
+    const randomFunction = new lambda.Function(this, 'randomFunction', {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset(path.join(lambdaPath, 'random-numbers')),
     });
+
+    // const randomFunction = new NodejsFunction(this, 'randomFunction', {
+    //   entry: `${lambdaPath}/random-numbers/index.ts`,
+    //   handler: 'handler',
+    //   // runtime: lambda.Runtime.NODEJS_14_X,
+    // });
 
     const randonTask = new sfnTasks.LambdaInvoke(this, 'randomTask', {
       lambdaFunction: randomFunction,
@@ -35,7 +41,7 @@ export class CdkStepFunctionDemo extends cdk.Stack {
 
     randonTask.addRetry({
       errors: ['KnownError'],
-      interval: Duration.seconds(1),
+      interval: cdk.Duration.seconds(1),
       maxAttempts: 3,
       backoffRate: 2,
     });
@@ -47,9 +53,9 @@ export class CdkStepFunctionDemo extends cdk.Stack {
       resultChoice
         .when(
           sfn.Condition.numberGreaterThanEquals('$.body.result', 25),
-          jobSuccessed
+          jobSuccessed,
         )
-        .otherwise(jobFailed)
+        .otherwise(jobFailed),
     );
 
     const sfnStateMachine = new sfn.StateMachine(this, 'stateMachine', {
