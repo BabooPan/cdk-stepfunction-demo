@@ -1,7 +1,7 @@
-import * as path from 'path';
+// import * as path from 'path';
+// import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as cdk from 'aws-cdk-lib';
-// import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 import * as sfnTasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
@@ -21,17 +21,11 @@ export class CdkStepFunctionDemo extends cdk.Stack {
 
     const lambdaPath = `${__dirname}/lambda-assets`;
 
-    const randomFunction = new lambda.Function(this, 'randomFunction', {
-      runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(lambdaPath, 'random-numbers')),
+    // Auto convert the .ts to .js, which can run in lambda
+    const randomFunction = new NodejsFunction(this, 'randomFunction', {
+      entry: `${lambdaPath}/random-numbers/index.ts`,
+      handler: 'handler',
     });
-
-    // const randomFunction = new NodejsFunction(this, 'randomFunction', {
-    //   entry: `${lambdaPath}/random-numbers/index.ts`,
-    //   handler: 'handler',
-    //   // runtime: lambda.Runtime.NODEJS_14_X,
-    // });
 
     const randonTask = new sfnTasks.LambdaInvoke(this, 'randomTask', {
       lambdaFunction: randomFunction,

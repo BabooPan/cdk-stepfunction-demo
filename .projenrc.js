@@ -18,24 +18,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // Default release the main branch with major version 2.
   majorVersion: 2,
   defaultReleaseBranch: 'main',
-  // Also release the 'cdkv1' branch with major version 1.
-  // releaseBranches: {
-  //   cdkv1: { npmDistTag: 'cdkv1', majorVersion: 1 },
-  // },
   depsUpgradeOptions: {
     ignoreProjen: false,
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],
-      // deepcode ignore HardcodedNonCryptoSecret: Allow to preform GitHub Actions
-      secret: 'AUTOMATION_GITHUB_TOKEN',
     },
   },
   autoApproveOptions: {
     // deepcode ignore HardcodedNonCryptoSecret: Allow to preform GitHub Actions
-    secret: 'GITHUB_TOKEN',
+    secret: 'PROJEN_GITHUB_TOKEN',
     allowedUsernames: ['baboopan'],
   },
   gitignore: [
+    '.vscode',
     '.dccache',
     'cdk.out',
     'cdk.context.json',

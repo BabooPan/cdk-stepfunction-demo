@@ -22,7 +22,7 @@ $ npx projen
 
 透過 `cdk deploy` 做部署，若在部署的 AWS Account 或是 Region 中沒有配置過 [CDK Toolkit](https://docs.aws.amazon.com/zh_tw/cdk/latest/guide/cli.html)，會報錯提示需要執行 `cdk bootstrap aws://012345678901/us-west-2`
 
-CDK Toolkit 為幫助 CDK 以 CloudFormation 部署相關資源的工具，會視 CDK 專案內容決定需不需要部署
+CDK Toolkit 為幫助 CDK 以 CloudFormation 部署相關資源的工具，會先將 CDK 所需要的項目與資源放置在自動生成的 S3 Bucket ，或是生成 IAM Role 來確保 CDK 部署 Applications 所需要的權限；這個事前部署的階段稱為 [CDK Bootstrapping](https://docs.aws.amazon.com/zh_tw/cdk/v2/guide/bootstrapping.html)
 
 ```bash
 # the cdk v2 need to boostrap first
