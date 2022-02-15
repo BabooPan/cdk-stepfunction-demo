@@ -14,7 +14,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   stability: 'experimental',
   autoDetectBin: false,
   dependabot: false,
-  cdkVersion: '2.10.0',
+  cdkVersion: '2.12.0',
   // Default release the main branch with major version 2.
   majorVersion: 2,
   defaultReleaseBranch: 'main',
