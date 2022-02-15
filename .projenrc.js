@@ -36,6 +36,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ['baboopan'],
   },
   gitignore: [
+    '.vscode',
+    '.vscode/settings.json',
     '.dccache',
     'cdk.out',
     'cdk.context.json',

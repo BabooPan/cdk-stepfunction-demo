@@ -31,6 +31,8 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+.vscode
+.vscode/settings.json
 .dccache
 cdk.out
 cdk.context.json
