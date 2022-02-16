@@ -22,13 +22,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     ignoreProjen: false,
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],
-      // deepcode ignore HardcodedNonCryptoSecret: Allow to preform GitHub Actions
-      secret: 'AUTOMATION_GITHUB_TOKEN',
     },
   },
   autoApproveOptions: {
     // deepcode ignore HardcodedNonCryptoSecret: Allow to preform GitHub Actions
-    secret: 'GITHUB_TOKEN',
+    secret: 'PROJEN_GITHUB_TOKEN',
     allowedUsernames: ['baboopan'],
   },
   gitignore: [
