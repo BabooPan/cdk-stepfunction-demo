@@ -29,6 +29,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     secret: 'PROJEN_GITHUB_TOKEN',
     allowedUsernames: ['baboopan'],
   },
+  devDeps: [
+    'esbuild',
+  ],
   gitignore: [
     '.vscode',
     '.dccache',
