@@ -21,12 +21,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
   depsUpgradeOptions: {
     ignoreProjen: false,
     workflowOptions: {
+      // The secret default name use  PROJEN_GITHUB_TOKEN, please add your PAT token in this repository secret.
+      // ref: https://github.com/projen/projen/blob/e5899dd04a575209424a08fe90bde99e07ac6c7b/src/github/github.ts#L46-L53
       labels: ['auto-approve', 'auto-merge'],
     },
   },
   autoApproveOptions: {
     // deepcode ignore HardcodedNonCryptoSecret: Allow to preform GitHub Actions
-    secret: 'PROJEN_GITHUB_TOKEN',
+    secret: 'GITHUB_TOKEN',
     allowedUsernames: ['baboopan'],
   },
   devDeps: [
