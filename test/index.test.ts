@@ -1,6 +1,6 @@
 import * as assertions from 'aws-cdk-lib/assertions';
 import { App, Stack } from 'aws-cdk-lib/core';
-import { CdkStepFunctionDemo } from '../src/index';
+import { CdkStepFunctionDemo } from '../src/main';
 
 test('test create stepfuntion state machine', () => {
   const app = new App();
