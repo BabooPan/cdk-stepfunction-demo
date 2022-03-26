@@ -3,15 +3,12 @@ const { awscdk } = require('projen');
 const PROJECT_NAME = 'cdk-stepfunction-demo';
 const PROJECT_DESCRIPTION = 'CDK Demo for Step Functions.';
 
-const project = new awscdk.AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkTypeScriptApp({
   name: PROJECT_NAME,
   description: PROJECT_DESCRIPTION,
   repository: 'https://github.com/baboopan/cdk-stepfunction-demo.git',
   authorName: 'Baboo Pan',
   authorEmail: 'lpig0818@gmail.com',
-  keywords: ['aws', 'stepfunction'],
-  release: false,
-  stability: 'experimental',
   autoDetectBin: false,
   dependabot: false,
   cdkVersion: '2.15.0',
